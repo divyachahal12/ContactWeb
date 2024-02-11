@@ -1,4 +1,5 @@
 ﻿using ContactWebModels;
+using MyContactManagerRepositories;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -7,34 +8,41 @@ namespace MyContactManagerServices
 {
     public class ContactsService : IContactsService
     {
-        Task<int> IContactsService.AddOrUpdateAsync(Contact state, string userId)
+        private IContactsRepository _contactsRepository;
+
+        public ContactsService(IContactsRepository contactsRepo)
         {
-            throw new NotImplementedException();
+            _contactsRepository = contactsRepo;
         }
 
-        Task<int> IContactsService.DeleteAsync(Contact state, string userId)
+        public async Task<IList<Contact>> GetAllAsync(string userId)
         {
-            throw new NotImplementedException();
+            return await _contactsRepository.GetAllAsync(userId);
         }
 
-        Task<int> IContactsService.DeleteAsync(int id, string userId)
+        public async Task<Contact?> GetAsync(int id, string userId)
         {
-            throw new NotImplementedException();
+            return await _contactsRepository.GetAsync(id, userId);
         }
 
-        Task<bool> IContactsService.ExistsAsync(int id, string userId)
+        public async Task<int> AddOrUpdateAsync(Contact contact, string userId)
         {
-            throw new NotImplementedException();
+            return await _contactsRepository.AddOrUpdateAsync(contact, userId);
         }
 
-        Task<IList<Contact>> IContactsService.GetAllAsync(string userId)
+        public async Task<int> DeleteAsync(Contact contact, string userId)
         {
-            throw new NotImplementedException();
+            return await _contactsRepository.DeleteAsync(contact, userId);
         }
 
-        Task<Contact> IContactsService.GetAsync(int id, string userId)
+        public async Task<int> DeleteAsync(int id, string userId)
         {
-            throw new NotImplementedException();
+            return await _contactsRepository.DeleteAsync(id, userId);
+        }
+
+        public async Task<bool> ExistsAsync(int id, string userId)
+        {
+            return await _contactsRepository.ExistsAsync(id, userId);
         }
     }
 }
