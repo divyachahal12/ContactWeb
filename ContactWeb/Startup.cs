@@ -9,6 +9,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using MyContactManagerData;
+using MyContactManagerRepositories;
+using MyContactManagerServices;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -44,6 +46,11 @@ namespace ContactWeb
             services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
                 .AddEntityFrameworkStores<ApplicationDbContext>();
             services.AddControllersWithViews();
+
+            services.AddScoped<IStatesRepository, StatesRepository>();
+            services.AddScoped<IStatesService, StatesService>();
+            services.AddScoped<IContactsRepository, ContactsRepository>();
+            services.AddScoped<IContactsService, ContactsService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
