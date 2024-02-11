@@ -21,6 +21,7 @@ namespace ContactWeb.Controllers
         private static IList<State> _allStates;
         private static SelectList _statesData;
         private IMemoryCache _cache;
+        private IMemoryCache _cache;
 
         public ContactsController(IContactsService contactsService, IStatesService statesService, IMemoryCache cache)
         {
@@ -106,6 +107,7 @@ namespace ContactWeb.Controllers
                 await _contactsService.AddOrUpdateAsync(contact, userId);
                 return RedirectToAction(nameof(Index));
             }
+            ViewData["StateId"] = _statesData;
             ViewData["StateId"] = _statesData;
             return View(contact);
         }
