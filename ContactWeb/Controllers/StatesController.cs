@@ -10,9 +10,13 @@ using MyContactManagerData;
 using MyContactManagerServices;
 using Microsoft.Extensions.Caching.Memory;
 using ContactWeb.Models;
+using Microsoft.AspNetCore.Authorization;
+using ContactWeb.Data;
 
 namespace ContactWeb.Controllers
 {
+    [Authorize(Roles = UserRolesService.ADMIN_ROLE_NAME)]
+    //[Authorize(Roles = "Admin")]
     public class StatesController : Controller
     {
         //private readonly MyContactManagerDbContext _context;
@@ -34,6 +38,8 @@ namespace ContactWeb.Controllers
         // GET: States
         public async Task<IActionResult> Index()
         {
+           // var roles = await UserRolesService.ADMIN_ROLE_NAME; // where 'user' is the ApplicationUser
+
             var allStates = new List<State>();
             if (!_cache.TryGetValue(ContactCacheConstants.ALL_STATES, out allStates))
             {
