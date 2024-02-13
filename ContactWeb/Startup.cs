@@ -44,6 +44,7 @@ namespace ContactWeb
 
 
             services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
+                .AddRoles<IdentityRole>()
                 .AddEntityFrameworkStores<ApplicationDbContext>();
             services.AddControllersWithViews();
 
@@ -51,6 +52,7 @@ namespace ContactWeb
             services.AddScoped<IStatesService, StatesService>();
             services.AddScoped<IContactsRepository, ContactsRepository>();
             services.AddScoped<IContactsService, ContactsService>();
+            services.AddScoped<IUserRolesService, UserRolesService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

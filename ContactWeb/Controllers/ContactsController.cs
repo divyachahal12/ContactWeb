@@ -11,9 +11,11 @@ using ContactWeb.Models;
 using System.Security.Claims;
 using MyContactManagerServices;
 using Microsoft.Extensions.Caching.Memory;
+using Microsoft.AspNetCore.Authorization;
 
 namespace ContactWeb.Controllers
 {
+    [Authorize]
     public class ContactsController : Controller
     {
         private readonly IContactsService _contactsService;
@@ -21,7 +23,7 @@ namespace ContactWeb.Controllers
         private static IList<State> _allStates;
         private static SelectList _statesData;
         private IMemoryCache _cache;
-        private IMemoryCache _cache;
+
 
         public ContactsController(IContactsService contactsService, IStatesService statesService, IMemoryCache cache)
         {
@@ -86,6 +88,7 @@ namespace ContactWeb.Controllers
         }
 
         // GET: Contacts/Create
+       
         public IActionResult Create()
         {
             ViewData["StateId"] = _statesData;
