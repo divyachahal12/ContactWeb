@@ -6,6 +6,7 @@
     <title>@ViewData["Title"] - Contact Web Manager</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" />
+    <link rel="stylesheet" href="~/css/datatables.min.css" asp-append-version="true" />
 </head>
 <body>
     <header>
@@ -19,8 +20,8 @@
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                     <ul class="navbar-nav flex-grow-1">
                         <li class="nav-item">
-                            <a class="nav-link text-dark @(ViewContext?.RouteData?.Values["Controller"]?.ToString() == "Home" 
-                                                                && ViewContext?.RouteData?.Values["Action"]?.ToString() == "Index" 
+                            <a class="nav-link text-dark @(ViewContext?.RouteData?.Values["Controller"]?.ToString() == "Home"
+                                                                && ViewContext?.RouteData?.Values["Action"]?.ToString() == "Index"
                                                 ? "active-link" : "")" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
                         </li>
                         <li class="nav-item">
@@ -59,6 +60,7 @@
     </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/lib/datatables/datatables.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
     @await RenderSectionAsync("Scripts", required: false)
 </body>
